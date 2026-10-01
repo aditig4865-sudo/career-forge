@@ -1,0 +1,96 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px; /* Pill shape for modern look */
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 1.125rem;
+  cursor: pointer;
+  padding: 0.875rem 2rem;
+  white-space: nowrap;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  transition: none;
+  z-index: 1;
+}
+
+.button:hover:not(:disabled)::after {
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+
+.button:active {
+  transform: scale(0.96) translateY(2px);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: #090B10; /* Dark text for high contrast on bright gradient */
+  border: none;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4), inset 0 -3px 0 rgba(0,0,0,0.2);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.primary:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 229, 255, 0.5), inset 0 -3px 0 rgba(0,0,0,0.2);
+  filter: brightness(1.15) saturate(1.2);
+}
+
+.secondary {
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-primary-dim);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: rgba(212, 175, 55, 0.1);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px var(--color-primary-dim);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border: none;
+}
+
+.ghost:hover:not(:disabled) {
+  color: var(--color-primary);
+  background-color: var(--color-primary-dim);
+}
+
+.fullWidth {
+  width: 100%;
+}

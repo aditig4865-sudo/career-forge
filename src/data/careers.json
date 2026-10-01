@@ -1,0 +1,93 @@
+[
+  {
+    "id": "software-engineer",
+    "title": "Software Engineer",
+    "overview": "Design, develop, and maintain software applications and systems. It involves writing code, debugging, and collaborating with cross-functional teams.",
+    "matchCriteria": {
+      "streams": ["Computer Science", "IT", "Mathematics", "Any"],
+      "interests": ["Coding", "Problem Solving", "Technology", "Web Development"]
+    },
+    "requiredSkills": ["Programming (Python, Java, C++, JS)", "Data Structures", "Algorithms", "Version Control"],
+    "educationPaths": [
+      "B.Tech/B.E. in Computer Science/IT",
+      "B.Sc. in Computer Science",
+      "BCA -> MCA"
+    ],
+    "skillsToLearn": ["System Design", "Cloud Computing", "Agile Methodologies"],
+    "roadmap": [
+      "Learn a programming language (e.g., Python or JavaScript)",
+      "Master Data Structures and Algorithms",
+      "Build basic projects (e.g., to-do list, weather app)",
+      "Learn Version Control (Git) and contribute to Open Source",
+      "Apply for internships"
+    ]
+  },
+  {
+    "id": "data-scientist",
+    "title": "Data Scientist",
+    "overview": "Analyze and interpret complex data to help organizations make better decisions. Combines statistics, computer science, and domain expertise.",
+    "matchCriteria": {
+      "streams": ["Computer Science", "Mathematics", "Statistics", "Engineering"],
+      "interests": ["Math", "Data Analysis", "AI/ML", "Research"]
+    },
+    "requiredSkills": ["Python/R", "Statistics & Probability", "Machine Learning", "SQL", "Data Visualization"],
+    "educationPaths": [
+      "B.Tech in CS/Data Science",
+      "B.Sc. in Statistics/Mathematics",
+      "Specialized Certification/Bootcamp"
+    ],
+    "skillsToLearn": ["Deep Learning", "Big Data Tools (Spark, Hadoop)", "Business Acumen"],
+    "roadmap": [
+      "Master Mathematics (Linear Algebra, Calculus, Statistics)",
+      "Learn Python and its data libraries (Pandas, NumPy)",
+      "Learn SQL for data extraction",
+      "Understand and apply basic Machine Learning algorithms",
+      "Build a portfolio with real-world datasets"
+    ]
+  },
+  {
+    "id": "ui-ux-designer",
+    "title": "UI/UX Designer",
+    "overview": "Focus on the user experience and interface design of digital products, ensuring they are intuitive, accessible, and visually appealing.",
+    "matchCriteria": {
+      "streams": ["Design", "Arts", "Any"],
+      "interests": ["Design", "Psychology", "Art", "Creativity"]
+    },
+    "requiredSkills": ["Figma/Adobe XD", "Wireframing", "Prototyping", "User Research", "Visual Communication"],
+    "educationPaths": [
+      "B.Des (Bachelor of Design)",
+      "B.A. in Psychology/Arts",
+      "Self-taught with strong portfolio"
+    ],
+    "skillsToLearn": ["HTML/CSS basics", "Interaction Design", "Accessibility Standards"],
+    "roadmap": [
+      "Learn design principles (Color, Typography, Layout)",
+      "Master design tools like Figma",
+      "Study User Experience (UX) laws and psychology",
+      "Create wireframes and interactive prototypes",
+      "Publish case studies to a portfolio"
+    ]
+  },
+  {
+    "id": "mechanical-engineer",
+    "title": "Mechanical Engineer",
+    "overview": "Design, analyze, manufacture, and maintain mechanical systems. Ranges from robotics to automotive and aerospace.",
+    "matchCriteria": {
+      "streams": ["Mechanical", "Science", "Engineering"],
+      "interests": ["Physics", "Machines", "Automotive", "Robotics"]
+    },
+    "requiredSkills": ["CAD Software (AutoCAD, SolidWorks)", "Thermodynamics", "Material Science", "Problem Solving"],
+    "educationPaths": [
+      "B.Tech/B.E. in Mechanical Engineering",
+      "Diploma in Mechanical Engineering"
+    ],
+    "skillsToLearn": ["Robotics & Automation", "Finite Element Analysis (FEA)", "Manufacturing Processes"],
+    "roadmap": [
+      "Strong foundation in Physics and Mathematics",
+      "Learn CAD software during college",
+      "Participate in technical competitions (e.g., SAE Baja, Formula Student)",
+      "Secure an industrial internship",
+      "Specialize in an area (e.g., Thermal, Design, Robotics)"
+    ]
+  }
+]
