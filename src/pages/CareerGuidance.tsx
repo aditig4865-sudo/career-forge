@@ -253,7 +253,7 @@ export function CareerGuidance() {
   };
 
   return (
-    <div className="container mt-xl mb-xl" style={{ paddingBottom: '4rem' }}>
+    <div className="container mt-xl mb-xl" style={{ paddingBottom: '8rem' }}>
       <div className="mb-xl">
         <h1>Career Guidance</h1>
         <p style={{ color: 'var(--text-secondary)' }}>Explore career paths based on your education, interests, skills, and goals.</p>

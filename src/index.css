@@ -1,6 +1,6 @@
 @import './styles/design-tokens.css';
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 * {
   box-sizing: border-box;
@@ -61,16 +61,17 @@ body {
 /* Removed animated gradient blobs to fix "AI slop" aesthetic */
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--color-text-main);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-primary); /* Use gold for headings to make it rich */
   margin-bottom: var(--space-md);
-  line-height: 1.05;
+  line-height: 1.1;
 }
 
-h1 { font-size: 5rem; }
-h2 { font-size: 3.75rem; }
-h3 { font-size: 2.25rem; }
+h1 { font-size: clamp(1.75rem, 4vw + 1rem, 4rem); }
+h2 { font-size: clamp(1.5rem, 3vw + 1rem, 3rem); }
+h3 { font-size: clamp(1.25rem, 2vw + 1rem, 2rem); }
 
 p {
   color: var(--color-text-muted);
@@ -232,4 +233,31 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 30px var(--color-surface-elevation) inset !important;
   -webkit-text-fill-color: var(--color-text-main) !important;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Responsive Overrides */
+@media (max-width: 992px) {
+  .resume-layout {
+    flex-direction: column !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .editor-pane {
+    width: 100% !important;
+    height: auto !important;
+    padding: var(--space-md) !important;
+  }
+  .preview-pane {
+    width: 100% !important;
+    min-height: 700px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn-group-responsive {
+    flex-wrap: wrap !important;
+  }
+  .btn-group-responsive > button {
+    flex: 1 1 calc(50% - 8px) !important;
+  }
 }

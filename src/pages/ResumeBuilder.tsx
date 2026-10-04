@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RotateCcw, Save, Download, FilePlus, Wand2 } from 'lucide-react';
+import { RotateCcw, Save, Download, FilePlus, Wand2, Search } from 'lucide-react';
 import { doc, getDoc, setDoc, addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../config/firebase';
 import { useReactToPrint } from 'react-to-print';
@@ -29,6 +29,7 @@ import { ExecutiveTemplate } from '../components/resume/templates/ExecutiveTempl
 import { IvyLeagueTemplate } from '../components/resume/templates/IvyLeagueTemplate';
 import { CreativeDirectorTemplate } from '../components/resume/templates/CreativeDirectorTemplate';
 import { AIGeneratorModal } from '../components/resume/AIGeneratorModal';
+import { ATSCheckerModal } from '../components/resume/ATSCheckerModal';
 import { useResume, TemplateId } from '../context/ResumeContext';
 import { initialResumeData } from '../types/resume';
 import { trackResumeSave } from '../services/adminService';
@@ -43,6 +44,7 @@ export function ResumeBuilder() {
   const [showResetModal, setShowResetModal] = useState(false);
   const [showNewResumeModal, setShowNewResumeModal] = useState(false);
   const [showAIGenerator, setShowAIGenerator] = useState(false);
+  const [showATSChecker, setShowATSChecker] = useState(false);
   const [resumeName, setResumeName] = useState('');
   const [newResumeName, setNewResumeName] = useState('');
   const [alertMsg, setAlertMsg] = useState<string | null>(null);
@@ -201,44 +203,49 @@ export function ResumeBuilder() {
   });
 
   return (
-    <div style={{ height: 'calc(100vh - 72px)', display: 'flex', overflow: 'hidden', marginBottom: '4rem' }}>
+    <div className="resume-layout" style={{ height: 'calc(100vh - 72px)', display: 'flex', overflow: 'hidden', marginBottom: '4rem' }}>
       
       {/* Editor Pane */}
-      <div style={{ width: '43%', padding: 'var(--space-xl)', overflowY: 'auto', backgroundColor: 'var(--color-canvas-base)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+      <div className="editor-pane" style={{ width: '43%', padding: 'var(--space-xl)', overflowY: 'auto', backgroundColor: 'var(--color-canvas-base)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
           <h1 style={{ margin: 0 }}>Build Resume</h1>
-          <Button variant="primary" onClick={() => setShowAIGenerator(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Wand2 size={16} /> Auto-Generate with AI
-          </Button>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <Button variant="secondary" onClick={() => setShowATSChecker(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', fontSize: '0.875rem' }}>
+              <Search size={16} /> ATS Match
+            </Button>
+            <Button variant="primary" onClick={() => setShowAIGenerator(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Wand2 size={16} /> Auto-Generate
+            </Button>
+          </div>
         </div>
         
         {/* Navigation for sections */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
           {/* Row 1 */}
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'nowrap', width: '100%' }}>
-            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px' }} variant={activeTab === 'personal' ? 'primary' : 'ghost'} onClick={() => setActiveTab('personal')}>
+          <div className="btn-group-responsive" style={{ display: 'flex', gap: '8px', flexWrap: 'nowrap', width: '100%' }}>
+            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'personal' ? 'primary' : 'ghost'} onClick={() => setActiveTab('personal')}>
               Personal Info
             </Button>
-            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px' }} variant={activeTab === 'education' ? 'primary' : 'ghost'} onClick={() => setActiveTab('education')}>
+            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'education' ? 'primary' : 'ghost'} onClick={() => setActiveTab('education')}>
               Education
             </Button>
-            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px' }} variant={activeTab === 'experience' ? 'primary' : 'ghost'} onClick={() => setActiveTab('experience')}>
+            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'experience' ? 'primary' : 'ghost'} onClick={() => setActiveTab('experience')}>
               Experience
             </Button>
-            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px' }} variant={activeTab === 'projects' ? 'primary' : 'ghost'} onClick={() => setActiveTab('projects')}>
+            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'projects' ? 'primary' : 'ghost'} onClick={() => setActiveTab('projects')}>
               Projects
             </Button>
-            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px' }} variant={activeTab === 'skills' ? 'primary' : 'ghost'} onClick={() => setActiveTab('skills')}>
+            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'skills' ? 'primary' : 'ghost'} onClick={() => setActiveTab('skills')}>
               Skills
             </Button>
           </div>
           
           {/* Row 2 */}
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'nowrap', width: '100%' }}>
-            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px' }} variant={activeTab === 'certifications' ? 'primary' : 'ghost'} onClick={() => setActiveTab('certifications')}>
+          <div className="btn-group-responsive" style={{ display: 'flex', gap: '8px', flexWrap: 'nowrap', width: '100%' }}>
+            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'certifications' ? 'primary' : 'ghost'} onClick={() => setActiveTab('certifications')}>
               Certifications
             </Button>
-            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px' }} variant={activeTab === 'achievements' ? 'primary' : 'ghost'} onClick={() => setActiveTab('achievements')}>
+            <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'achievements' ? 'primary' : 'ghost'} onClick={() => setActiveTab('achievements')}>
               Achievements
             </Button>
             <Button style={{ flex: 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px' }} variant={activeTab === 'languages' ? 'primary' : 'ghost'} onClick={() => setActiveTab('languages')}>
@@ -309,7 +316,7 @@ export function ResumeBuilder() {
       </div>
 
       {/* Preview Pane */}
-      <div style={{ 
+      <div className="preview-pane" style={{ 
         width: '57%', 
         backgroundColor: 'var(--color-subtle-surface)', 
         borderLeft: '1px solid var(--color-structural-border)',
@@ -320,18 +327,20 @@ export function ResumeBuilder() {
           display: 'flex', 
           justifyContent: 'space-between', 
           alignItems: 'center', 
-          padding: '16px 32px',
+          padding: '16px',
           borderBottom: '1px solid var(--color-structural-border)',
           backgroundColor: 'var(--color-subtle-surface)',
-          zIndex: 10
+          zIndex: 10,
+          flexWrap: 'wrap',
+          gap: '12px'
         }}>
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: 0, fontSize: '1.5rem' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: 0, fontSize: '1.25rem', flexWrap: 'wrap' }}>
             Live Preview 
-            <span style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', fontWeight: 400, marginTop: '2px' }}>
+            <span style={{ fontSize: '1rem', color: 'var(--color-text-muted)', fontWeight: 400, marginTop: '2px' }}>
               ({selectedTemplate.charAt(0).toUpperCase() + selectedTemplate.slice(1)} Template)
             </span>
           </h2>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <Button variant="secondary" onClick={handleReset} style={{ padding: '6px 16px', fontSize: '0.875rem', height: 'auto', minHeight: '36px', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-error)' }}>
               <RotateCcw size={16} /> Reset
             </Button>
@@ -507,6 +516,7 @@ export function ResumeBuilder() {
       <AuthModal isOpen={showAuthPrompt} onClose={() => setShowAuthPrompt(false)} />
 
       <AIGeneratorModal isOpen={showAIGenerator} onClose={() => setShowAIGenerator(false)} />
+      <ATSCheckerModal isOpen={showATSChecker} onClose={() => setShowATSChecker(false)} />
     </div>
   );
 }
