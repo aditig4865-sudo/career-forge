@@ -464,12 +464,12 @@ export function CareerGuidance() {
         {/* Chat Window */}
         {isChatOpen && (
           <div className="animate-fade-in-up" style={{ width: '380px', height: '500px', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden', border: '1px solid var(--color-primary)', borderRadius: 'var(--radius-xl)', boxShadow: '0 10px 40px rgba(0,0,0,0.3)', backgroundColor: '#000000' }}>
-            <div style={{ padding: '1rem', backgroundColor: 'var(--color-primary)', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '1rem', backgroundColor: '#0a0a0a', color: 'var(--color-primary)', borderBottom: '1px solid var(--color-primary)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Bot size={20} />
-                <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'white' }}>AI Career Assistant</h3>
+                <Bot size={20} color="var(--color-primary)" />
+                <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-primary)' }}>AI Career Assistant</h3>
               </div>
-              <button onClick={() => setIsChatOpen(false)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', padding: 0, display: 'flex' }}>
+              <button onClick={() => setIsChatOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--color-primary)', cursor: 'pointer', padding: 0, display: 'flex' }}>
                 <X size={20} />
               </button>
             </div>
@@ -478,33 +478,34 @@ export function CareerGuidance() {
               {chatMessages.map((msg, idx) => (
                 <div key={idx} style={{ alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '85%' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
-                    {msg.role === 'ai' ? <Bot size={14} color="var(--color-primary)" /> : <User size={14} color="var(--text-secondary)" />}
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{msg.role === 'ai' ? 'AI Assistant' : 'You'}</span>
+                    {msg.role === 'ai' ? <Bot size={14} color="var(--color-primary)" /> : <User size={14} color="var(--color-primary)" />}
+                    <span style={{ fontSize: '0.75rem', color: 'var(--color-primary)', opacity: 0.8 }}>{msg.role === 'ai' ? 'AI Assistant' : 'You'}</span>
                   </div>
                   <div style={{ 
                     padding: '0.8rem 1rem', 
                     borderRadius: '12px', 
-                    backgroundColor: msg.role === 'user' ? 'var(--color-primary)' : '#1f1f1f', 
-                    color: msg.role === 'user' ? 'white' : '#e0e0e0',
+                    backgroundColor: msg.role === 'user' ? 'var(--color-primary)' : '#0a0a0a', 
+                    color: msg.role === 'user' ? '#000000' : 'var(--color-primary)',
                     borderBottomRightRadius: msg.role === 'user' ? 0 : '12px',
                     borderBottomLeftRadius: msg.role === 'ai' ? 0 : '12px',
                     fontSize: '0.95rem',
                     lineHeight: 1.5,
-                    border: msg.role === 'ai' ? '1px solid var(--color-structural-border)' : 'none'
+                    border: msg.role === 'ai' ? '1px solid var(--color-primary)' : 'none',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
                   }}>
                     <div dangerouslySetInnerHTML={{ __html: msg.text.replace(/\n/g, '<br/>') }} />
                   </div>
                 </div>
               ))}
               {asking && (
-                <div style={{ alignSelf: 'flex-start', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                <div style={{ alignSelf: 'flex-start', fontSize: '0.85rem', color: 'var(--color-primary)', opacity: 0.8 }}>
                   AI is typing...
                 </div>
               )}
               <div ref={chatEndRef} />
             </div>
 
-            <form onSubmit={e => handleAskQuestion(e)} style={{ padding: '1rem', borderTop: '1px solid var(--color-structural-border)', backgroundColor: '#0a0a0a', display: 'flex', gap: '0.5rem' }}>
+            <form onSubmit={e => handleAskQuestion(e)} style={{ padding: '1rem', borderTop: '1px solid var(--color-primary)', backgroundColor: '#0a0a0a', display: 'flex', gap: '0.5rem' }}>
               <Input 
                 placeholder={selectedCareer ? `Ask about ${selectedCareer.name}...` : "Type a question..."}
                 value={followUpQuestion}
