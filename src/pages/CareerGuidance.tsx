@@ -463,7 +463,7 @@ export function CareerGuidance() {
       <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1rem' }}>
         {/* Chat Window */}
         {isChatOpen && (
-          <Card className="animate-fade-in-up glass-panel" style={{ width: '380px', height: '500px', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden', border: '1px solid var(--color-primary)', boxShadow: '0 10px 40px rgba(0,0,0,0.3)' }}>
+          <Card className="animate-fade-in-up" style={{ width: '380px', height: '500px', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden', border: '1px solid var(--color-primary)', boxShadow: '0 10px 40px rgba(0,0,0,0.3)', backgroundColor: '#000000' }}>
             <div style={{ padding: '1rem', backgroundColor: 'var(--color-primary)', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Bot size={20} />
@@ -504,7 +504,7 @@ export function CareerGuidance() {
               <div ref={chatEndRef} />
             </div>
 
-            <form onSubmit={e => handleAskQuestion(e)} style={{ padding: '1rem', borderTop: '1px solid var(--color-structural-border)', backgroundColor: 'var(--color-surface-elevation)', display: 'flex', gap: '0.5rem' }}>
+            <form onSubmit={e => handleAskQuestion(e)} style={{ padding: '1rem', borderTop: '1px solid var(--color-structural-border)', backgroundColor: '#0a0a0a', display: 'flex', gap: '0.5rem' }}>
               <Input 
                 placeholder={selectedCareer ? `Ask about ${selectedCareer.name}...` : "Type a question..."}
                 value={followUpQuestion}
