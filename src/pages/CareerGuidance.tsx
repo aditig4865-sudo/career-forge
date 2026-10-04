@@ -474,7 +474,7 @@ export function CareerGuidance() {
               </button>
             </div>
             
-            <div style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', backgroundColor: 'var(--color-background)' }}>
+            <div style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', backgroundColor: '#000000' }}>
               {chatMessages.map((msg, idx) => (
                 <div key={idx} style={{ alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '85%' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
@@ -484,8 +484,8 @@ export function CareerGuidance() {
                   <div style={{ 
                     padding: '0.8rem 1rem', 
                     borderRadius: '12px', 
-                    backgroundColor: msg.role === 'user' ? 'var(--color-primary)' : 'var(--color-surface-hover)', 
-                    color: msg.role === 'user' ? 'white' : 'var(--text-primary)',
+                    backgroundColor: msg.role === 'user' ? 'var(--color-primary)' : '#1f1f1f', 
+                    color: msg.role === 'user' ? 'white' : '#e0e0e0',
                     borderBottomRightRadius: msg.role === 'user' ? 0 : '12px',
                     borderBottomLeftRadius: msg.role === 'ai' ? 0 : '12px',
                     fontSize: '0.95rem',
