@@ -149,13 +149,23 @@ export function ResumeBuilder() {
     }
   };
   
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
-  const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 768);
+  const checkIsMobile = () => {
+    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return isMobileUA || window.innerWidth <= 992;
+  };
+
+  const checkIsSmallMobile = () => {
+    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return isMobileUA || window.innerWidth <= 768;
+  };
+  
+  const [isMobile, setIsMobile] = useState(checkIsMobile());
+  const [isSmallMobile, setIsSmallMobile] = useState(checkIsSmallMobile());
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 992);
-      setIsSmallMobile(window.innerWidth <= 768);
+      setIsMobile(checkIsMobile());
+      setIsSmallMobile(checkIsSmallMobile());
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -215,7 +225,7 @@ export function ResumeBuilder() {
   });
 
   return (
-    <div style={{ 
+    <div className="resume-layout" style={{ 
       height: isMobile ? 'auto' : 'calc(100vh - 72px)', 
       display: 'flex', 
       flexDirection: isMobile ? 'column' : 'row',
@@ -224,7 +234,7 @@ export function ResumeBuilder() {
     }}>
       
       {/* Editor Pane */}
-      <div style={{ 
+      <div className="editor-pane" style={{ 
         width: isMobile ? '100%' : '43%', 
         height: isMobile ? 'auto' : '100%',
         padding: isMobile ? 'var(--space-md)' : 'var(--space-xl)', 
@@ -340,7 +350,7 @@ export function ResumeBuilder() {
       </div>
 
       {/* Preview Pane */}
-      <div style={{ 
+      <div className="preview-pane" style={{ 
         width: isMobile ? '100%' : '57%', 
         minHeight: isMobile ? '700px' : 'auto',
         backgroundColor: 'var(--color-subtle-surface)', 
