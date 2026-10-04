@@ -118,8 +118,8 @@ export function EducationForm() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-            <div style={{ flex: 1 }}>
+          <div className="form-grid form-grid-2" style={{ marginBottom: '1rem' }}>
+            <div>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Degree</label>
               <CreatableSelect
                 isClearable
@@ -132,7 +132,7 @@ export function EducationForm() {
                 placeholder="Type or select..."
               />
             </div>
-            <div style={{ flex: 1 }}>
+            <div>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Field of Study</label>
               <CreatableSelect
                 isClearable
@@ -147,8 +147,8 @@ export function EducationForm() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <div style={{ flex: 1 }}>
+          <div className="form-grid form-grid-3">
+            <div>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Start Date</label>
               <DatePicker
                 selected={edu.startDate ? new Date(edu.startDate) : null}
@@ -161,7 +161,7 @@ export function EducationForm() {
                 placeholderText="Select Month & Year"
               />
             </div>
-            <div style={{ flex: 1 }}>
+            <div>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>End Date</label>
               {edu.endDate === 'Present' ? (
                 <div style={{ padding: '0.75rem', background: 'var(--color-surface-elevation)', border: '1px solid var(--color-structural-border)', color: 'white', borderRadius: '4px', opacity: 0.7, marginBottom: '0.5rem' }}>Present</div>
@@ -188,7 +188,7 @@ export function EducationForm() {
                 Currently studying here
               </label>
             </div>
-            <div style={{ flex: 1 }}>
+            <div>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>GPA / Score (Optional)</label>
               <input 
                 type="text" 

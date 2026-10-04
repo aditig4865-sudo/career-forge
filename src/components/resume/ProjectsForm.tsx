@@ -51,8 +51,8 @@ export function ProjectsForm() {
             </Button>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-            <div style={{ flex: 1 }}>
+          <div className="form-grid form-grid-2" style={{ marginBottom: '1rem' }}>
+            <div>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Project Name</label>
               <input 
                 type="text" 
@@ -62,7 +62,7 @@ export function ProjectsForm() {
                 placeholder={index === 0 ? "Resume Builder" : "Career Guidance"}
               />
             </div>
-            <div style={{ flex: 1 }}>
+            <div>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Technologies Used</label>
               <input 
                 type="text" 

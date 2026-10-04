@@ -353,7 +353,7 @@ export function CareerGuidance() {
 
             <div>
               <h3 className="mb-md">Career Paths to Explore</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-md)' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-md)' }}>
                 {results.careerPaths?.map((path: any, index: number) => (
                   <Card key={index} className={`animate-fade-in-up stagger-${(index % 5) + 1} hover-lift`} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                     <h4 style={{ color: 'var(--color-primary)', marginBottom: '0.5rem', fontSize: '1.25rem' }}>{path.name}</h4>
@@ -413,7 +413,7 @@ export function CareerGuidance() {
               <p style={{ lineHeight: 1.7, fontSize: '16px' }}>{selectedCareer.careerDetails.whatItInvolves}</p>
             </Card>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-lg)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-lg)' }}>
               <Card className="animate-fade-in-up stagger-2 hover-lift">
                 <h4 style={{ marginBottom: '1rem', color: 'var(--color-primary)', fontSize: '1.15rem' }}>Why it matches your profile</h4>
                 <p style={{ fontSize: '15.5px', lineHeight: 1.6 }}>{selectedCareer.careerDetails.whyItMatches}</p>

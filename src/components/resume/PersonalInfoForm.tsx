@@ -170,7 +170,7 @@ export function PersonalInfoForm() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
       <Input label="Full Name" name="fullName" value={personalInfo.fullName} onChange={handleChange} placeholder="Your Full Name" />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
+      <div className="form-grid form-grid-2">
         <Input 
           label="Email" 
           name="email" 
@@ -212,7 +212,7 @@ export function PersonalInfoForm() {
         </div>
       </div>
       
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'var(--space-md)' }}>
+      <div className="form-grid form-grid-3">
         <div>
           <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Country</label>
           <CreatableSelect
@@ -274,7 +274,7 @@ export function PersonalInfoForm() {
         </div>
       </div>
       
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
+      <div className="form-grid form-grid-2">
         <Input label="Portfolio / Website" name="portfolio" value={personalInfo.portfolio} onChange={handleChange} placeholder="yourwebsite.com" />
         <Input label="LinkedIn" name="linkedin" value={personalInfo.linkedin} onChange={handleChange} placeholder="linkedin.com/in/yourname" />
       </div>
