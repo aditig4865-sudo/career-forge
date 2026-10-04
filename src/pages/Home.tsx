@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, Variants } from 'framer-motion';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import styles from './Home.module.css';
@@ -33,25 +34,40 @@ export function Home() {
     }
   }, [location]);
 
+  const fadeInUp: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const staggerContainer: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
   return (
     <div className="container">
       {/* HERO SECTION */}
       <section className={styles.heroSection}>
-        <div className={`${styles.heroLeft} animate-fade-in-up stagger-1`}>
-          <h1 className={styles.heroHeadline}>Build Your Resume.<br/>Plan Your Career.</h1>
-          <p className={styles.heroText}>
+        <motion.div className={styles.heroLeft} initial="hidden" animate="visible" variants={staggerContainer}>
+          <motion.h1 className={styles.heroHeadline} variants={fadeInUp}>Build Your Resume.<br/>Plan Your Career.</motion.h1>
+          <motion.p className={styles.heroText} variants={fadeInUp}>
             Create a professional resume and explore career paths based on your interests, skills, and education.
-          </p>
-          <div className={`${styles.heroButtons} animate-fade-in-up stagger-2`}>
+          </motion.p>
+          <motion.div className={styles.heroButtons} variants={fadeInUp}>
             <Link to="/resume-builder">
               <Button variant="primary">Build My Resume</Button>
             </Link>
             <Link to="/career-guidance">
               <Button variant="secondary">Explore Careers</Button>
             </Link>
-          </div>
-        </div>
-        <div className={`${styles.heroRight} animate-fade-in-up stagger-3`}>
+          </motion.div>
+        </motion.div>
+        <motion.div className={styles.heroRight} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}>
           <div className={styles.floatingCardsContainer}>
             <div className={`${styles.floatingCard} ${styles.card1}`}>
               <div className={styles.cardGlow}></div>
@@ -84,38 +100,38 @@ export function Home() {
               <div className={styles.skeletonLine} style={{width: '40%'}}></div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* FEATURES */}
-      <section className={styles.section}>
-        <h2 className={`${styles.sectionTitle} animate-fade-in-up stagger-1`}>Everything You Need</h2>
+      <motion.section className={styles.section} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
+        <motion.h2 className={styles.sectionTitle} variants={fadeInUp}>Everything You Need</motion.h2>
         <div className={styles.featuresGrid}>
-          <div className="animate-fade-in-up stagger-2 hover-lift">
+          <motion.div variants={fadeInUp} whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 300 }}>
             <Card>
               <h3 style={{ marginBottom: '1rem' }}>Resume Builder</h3>
               <p>Create a standout resume tailored for internships and early-career opportunities with live previews and professional formatting.</p>
             </Card>
-          </div>
-          <div className="animate-fade-in-up stagger-3 hover-lift">
+          </motion.div>
+          <motion.div variants={fadeInUp} whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 300 }}>
             <Card>
               <h3 style={{ marginBottom: '1rem' }}>Career Guidance</h3>
               <p>Enter your interests, skills, and education to get personalized career recommendations and an actionable roadmap.</p>
             </Card>
-          </div>
-          <div className="animate-fade-in-up stagger-4 hover-lift">
+          </motion.div>
+          <motion.div variants={fadeInUp} whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 300 }}>
             <Card>
               <h3 style={{ marginBottom: '1rem' }}>Resume Templates</h3>
               <p>Choose from beautifully crafted templates designed specifically for engineering, tech, and business roles.</p>
             </Card>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* RESUME BUILDER PREVIEW */}
-      <section className={styles.section}>
+      <motion.section className={styles.section} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
         <div style={{ display: 'flex', gap: 'var(--space-2xl)', alignItems: 'center', flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: '350px' }} className="animate-fade-in-up stagger-1">
+          <motion.div style={{ flex: 1, minWidth: '350px' }} variants={fadeInUp}>
             <h2 className={styles.sectionTitle} style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Create a Resume You're Proud Of</h2>
             <p style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', marginBottom: '2.5rem' }}>
               Our editor breaks down the process into simple sections. Fill in your education, projects, and skills, and see your resume update in real-time.
@@ -123,9 +139,9 @@ export function Home() {
             <Link to="/resume-builder">
               <Button variant="primary" className="hover-lift hover-glow">Start Building</Button>
             </Link>
-          </div>
-          <div style={{ flex: 1, minWidth: '350px', display: 'flex', justifyContent: 'center' }} className="animate-fade-in-up stagger-3">
-             <div className="glass-panel hover-lift" style={{ width: '100%', maxWidth: '450px', padding: '2.5rem' }}>
+          </motion.div>
+          <motion.div style={{ flex: 1, minWidth: '350px', display: 'flex', justifyContent: 'center' }} variants={fadeInUp}>
+             <motion.div className="glass-panel" whileHover={{ y: -10, rotate: 2 }} transition={{ type: "spring", stiffness: 300 }} style={{ width: '100%', maxWidth: '450px', padding: '2.5rem' }}>
                <div style={{ textAlign: 'center', borderBottom: '1px solid var(--color-structural-border)', paddingBottom: '1.5rem', marginBottom: '1.5rem' }}>
                  <h3 style={{ margin: 0, fontSize: '2rem' }}>Aarav Sharma</h3>
                  <p style={{ fontSize: '1rem', color: 'var(--color-text-muted)', margin: '0.5rem 0 0 0' }}>aarav.sharma@gmail.com • Pune, Maharashtra</p>
@@ -143,22 +159,22 @@ export function Home() {
                    <span style={{ border: '1px solid var(--color-structural-border)', padding: '4px 12px', borderRadius: '999px', fontSize: '0.875rem' }}>Node.js</span>
                  </div>
                </div>
-             </div>
-          </div>
+             </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CAREER GUIDANCE SECTION */}
-      <section className={styles.section}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }} className="animate-fade-in-up stagger-1">
+      <motion.section className={styles.section} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
+        <motion.div style={{ textAlign: 'center', marginBottom: '4rem' }} variants={fadeInUp}>
           <h2 className={styles.sectionTitle} style={{ marginBottom: '1rem' }}>Not Sure What Career to Choose?</h2>
           <p style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', maxWidth: '700px', margin: '0 auto' }}>
             Discover career paths that match your academic background and personal interests.
           </p>
-        </div>
+        </motion.div>
 
         <div className={styles.careerCards}>
-          <div className="animate-fade-in-up stagger-2 hover-lift">
+          <motion.div variants={fadeInUp} whileHover={{ y: -10, scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
             <Card>
               <h3 style={{ marginBottom: '0.5rem' }}>Software Engineer</h3>
             <p style={{ fontSize: '1rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
@@ -169,8 +185,8 @@ export function Home() {
               <span style={{ border: '1px solid var(--color-structural-border)', color: 'var(--color-text-muted)', padding: '4px 12px', borderRadius: '999px', fontSize: '0.875rem' }}>Algorithms</span>
             </div>
             </Card>
-          </div>
-          <div className="animate-fade-in-up stagger-3 hover-lift">
+          </motion.div>
+          <motion.div variants={fadeInUp} whileHover={{ y: -10, scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
             <Card>
               <h3 style={{ marginBottom: '0.5rem' }}>Data Scientist</h3>
             <p style={{ fontSize: '1rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
@@ -181,8 +197,8 @@ export function Home() {
               <span style={{ border: '1px solid var(--color-structural-border)', color: 'var(--color-text-muted)', padding: '4px 12px', borderRadius: '999px', fontSize: '0.875rem' }}>ML</span>
             </div>
             </Card>
-          </div>
-          <div className="animate-fade-in-up stagger-4 hover-lift">
+          </motion.div>
+          <motion.div variants={fadeInUp} whileHover={{ y: -10, scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
             <Card>
               <h3 style={{ marginBottom: '0.5rem' }}>UI/UX Designer</h3>
             <p style={{ fontSize: '1rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
@@ -193,52 +209,52 @@ export function Home() {
               <span style={{ border: '1px solid var(--color-structural-border)', color: 'var(--color-text-muted)', padding: '4px 12px', borderRadius: '999px', fontSize: '0.875rem' }}>Wireframing</span>
             </div>
             </Card>
-          </div>
+          </motion.div>
         </div>
-        <div style={{ textAlign: 'center' }} className="animate-fade-in-up stagger-5">
+        <motion.div style={{ textAlign: 'center' }} variants={fadeInUp}>
           <Link to="/career-guidance">
             <Button variant="secondary">Explore Career Paths</Button>
           </Link>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* HOW IT WORKS */}
-      <section className={styles.section}>
-        <h2 className={`${styles.sectionTitle} animate-fade-in-up stagger-1`}>How It Works</h2>
+      <motion.section className={styles.section} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
+        <motion.h2 className={styles.sectionTitle} variants={fadeInUp}>How It Works</motion.h2>
         <div className={styles.stepsGrid}>
-          <div className="animate-fade-in-up stagger-2">
+          <motion.div variants={fadeInUp}>
             <span className={styles.stepNumber}>01 — Tell Us</span>
             <p className={styles.stepText}>Input your academic stream, skills, and personal interests into our simple form.</p>
-          </div>
-          <div className="animate-fade-in-up stagger-3">
+          </motion.div>
+          <motion.div variants={fadeInUp}>
             <span className={styles.stepNumber}>02 — Explore</span>
             <p className={styles.stepText}>Use the Resume Builder to craft your profile or discover matching careers.</p>
-          </div>
-          <div className="animate-fade-in-up stagger-4">
+          </motion.div>
+          <motion.div variants={fadeInUp}>
             <span className={styles.stepNumber}>03 — Next Step</span>
             <p className={styles.stepText}>Download your polished resume as a PDF and follow your career roadmap.</p>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* FEEDBACK SECTION */}
-      <section id="feedback" className={styles.section} style={{ textAlign: 'center', position: 'relative' }}>
+      <motion.section id="feedback" className={styles.section} style={{ textAlign: 'center', position: 'relative' }} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
         
-        <h2 className={styles.sectionTitle} style={{ marginBottom: '1rem' }}>We Value Your Voice</h2>
-        <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem auto' }}>
+        <motion.h2 className={styles.sectionTitle} style={{ marginBottom: '1rem' }} variants={fadeInUp}>We Value Your Voice</motion.h2>
+        <motion.p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem auto' }} variants={fadeInUp}>
           Your insights help us shape the future of CareerForge. Drop a thought, rate your experience, or suggest a brilliant new feature.
-        </p>
+        </motion.p>
         
-        <div className={styles.feedbackSection}>
+        <motion.div className={styles.feedbackSection} variants={fadeInUp}>
           {feedbackState === 'submitted' ? (
-            <div className="glass-panel animate-fade-in-up" style={{ padding: '3rem', borderRadius: 'var(--radius-xl)', textAlign: 'center' }}>
+            <motion.div className="glass-panel" style={{ padding: '3rem', borderRadius: 'var(--radius-xl)', textAlign: 'center' }} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✨</div>
               <h3 style={{ color: 'var(--color-success)', marginBottom: '1rem', fontSize: '2rem' }}>Thank You!</h3>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', marginBottom: '2rem' }}>Your feedback fuels our innovation. We appreciate you taking the time to share your thoughts.</p>
               <Button variant="ghost" onClick={() => { setFeedbackState('idle'); setRating(0); }} style={{ padding: '0.75rem 2rem' }}>Submit Another</Button>
-            </div>
+            </motion.div>
           ) : (
-            <div className="glass-panel animate-fade-in-up" style={{ padding: '3rem', borderRadius: 'var(--radius-xl)', textAlign: 'left', position: 'relative', overflow: 'visible' }}>
+            <motion.div className="glass-panel" style={{ padding: '3rem', borderRadius: 'var(--radius-xl)', textAlign: 'left', position: 'relative', overflow: 'visible' }} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
               <form 
                 className={styles.feedbackForm}
                 onSubmit={async (e) => {
@@ -318,10 +334,10 @@ export function Home() {
                   Send Feedback 🚀
                 </Button>
               </form>
-            </div>
+            </motion.div>
           )}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
     </div>
   );
 }

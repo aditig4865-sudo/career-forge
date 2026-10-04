@@ -83,3 +83,44 @@ User Prompt: ${prompt}`;
     throw new Error("Failed to generate resume from AI.");
   }
 }
+
+export async function checkATSMatch(resumeData: ResumeData, jobDescription: string) {
+  if (!GEMINI_API_KEY) {
+    throw new Error("Missing Gemini API Key in environment variables.");
+  }
+
+  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+  const systemPrompt = `You are an expert ATS (Applicant Tracking System) software. Analyze the provided resume against the job description.
+Return ONLY valid JSON with no markdown formatting.
+Format:
+{
+  "score": number (0-100),
+  "matchingKeywords": ["keyword1", "keyword2"],
+  "missingKeywords": ["keyword1", "keyword2"],
+  "suggestions": ["suggestion1", "suggestion2"]
+}
+
+Resume Data:
+${JSON.stringify(resumeData)}
+
+Job Description:
+${jobDescription}`;
+
+  try {
+    const result = await model.generateContent(systemPrompt);
+    const response = await result.response;
+    let text = response.text();
+    text = text.replace(/```json\n?/, '').replace(/```\n?/, '');
+    return JSON.parse(text) as {
+      score: number;
+      matchingKeywords: string[];
+      missingKeywords: string[];
+      suggestions: string[];
+    };
+  } catch (error) {
+    console.error("Error checking ATS match:", error);
+    throw new Error("Failed to check ATS match from AI.");
+  }
+}

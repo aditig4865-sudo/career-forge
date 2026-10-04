@@ -14,6 +14,7 @@
     "@types/react-datepicker": "^6.2.0",
     "country-state-city": "^3.2.1",
     "firebase": "^12.19.0",
+    "framer-motion": "^13.5.0",
     "lucide-react": "^1.48.0",
     "react": "^19.2.8",
     "react-datepicker": "^9.1.0",

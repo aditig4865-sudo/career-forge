@@ -244,7 +244,7 @@
   .heroSection {
     flex-direction: column;
     text-align: center;
-    padding: 6rem 0;
+    padding: 6rem 0 2rem 0;
   }
   .heroButtons {
     justify-content: center;
@@ -257,5 +257,28 @@
   }
   .sectionTitle {
     font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroHeadline {
+    font-size: 2.25rem;
+    line-height: 1.1;
+  }
+  .heroText {
+    font-size: 1.125rem;
+    padding: 0 1rem;
+  }
+  .heroButtons {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 1rem;
+    width: 100%;
+  }
+  .heroButtons button {
+    width: 100%;
+  }
+  .floatingCardsContainer {
+    display: none; /* Hide complex animation on tiny screens for better performance and layout */
   }
 }
