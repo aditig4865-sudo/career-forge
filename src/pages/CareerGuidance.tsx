@@ -460,10 +460,10 @@ export function CareerGuidance() {
       </div>
 
       {/* Floating AI Assistant Widget */}
-      <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1rem' }}>
+      <div style={{ position: 'fixed', bottom: '1rem', right: '1rem', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1rem', maxWidth: 'calc(100vw - 2rem)' }}>
         {/* Chat Window */}
         {isChatOpen && (
-          <div className="animate-fade-in-up" style={{ width: '380px', height: '500px', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden', border: '1px solid var(--color-primary)', borderRadius: 'var(--radius-xl)', boxShadow: '0 10px 40px rgba(0,0,0,0.3)', backgroundColor: '#000000' }}>
+          <div className="animate-fade-in-up" style={{ width: '380px', maxWidth: '100%', height: '500px', maxHeight: 'calc(100vh - 6rem)', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden', border: '1px solid var(--color-primary)', borderRadius: 'var(--radius-xl)', boxShadow: '0 10px 40px rgba(0,0,0,0.3)', backgroundColor: '#000000' }}>
             <div style={{ padding: '1rem', backgroundColor: '#0a0a0a', color: 'var(--color-primary)', borderBottom: '1px solid var(--color-primary)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Bot size={20} color="var(--color-primary)" />
@@ -488,7 +488,7 @@ export function CareerGuidance() {
                     color: msg.role === 'user' ? '#000000' : 'var(--color-primary)',
                     borderBottomRightRadius: msg.role === 'user' ? 0 : '12px',
                     borderBottomLeftRadius: msg.role === 'ai' ? 0 : '12px',
-                    fontSize: '0.95rem',
+                    fontSize: '0.85rem',
                     lineHeight: 1.5,
                     border: msg.role === 'ai' ? '1px solid var(--color-primary)' : 'none',
                     boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
