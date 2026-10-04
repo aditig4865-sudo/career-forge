@@ -72,7 +72,12 @@ ${JSON.stringify(profile, null, 2)}`;
 export async function askCareerQuestion(question: string, contextProfile: any): Promise<string> {
   if (!GROQ_API_KEY) return "Missing API Key";
 
-  const systemMessage = "You are an expert career counselor and AI assistant. Your answers MUST be extremely concise, straight to the point, and brief. Never give long unsolicited explanations. Instead, answer directly and then ask questions like 'Would you like a detailed roadmap for this?' or 'Can I provide more specific skills for this role?'. Only provide the detailed information if the user explicitly asks for it. DO NOT USE ANY MARKDOWN FORMATTING (no bold, no asterisks, no tables, no lists). Respond in plain text only.";
+  const systemMessage = `You are a Career Assistant. 
+CRITICAL RULES:
+1. Answers MUST be extremely short (1-3 sentences maximum).
+2. ONLY give the specific point requested. No fluff.
+3. ALWAYS end by asking a question offering one specific thing (e.g. "Can I give you a roadmap for this?" or "Would you like a list of skills?").
+4. DO NOT use markdown, bold, asterisks, or lists. Plain text only.`;
   const prompt = `Student Profile Context:\n${JSON.stringify(contextProfile, null, 2)}\n\nStudent Question: ${question}\n\nPlease provide a helpful answer based on their profile.`;
 
   try {

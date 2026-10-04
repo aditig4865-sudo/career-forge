@@ -18,7 +18,7 @@
 
 .input {
   height: 48px; /* Slightly taller for modern look */
-  background-color: rgba(255, 255, 255, 0.03); /* Glassy background */
+  background-color: #050505; /* Solid dark background */
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-base);
   padding: 0 1rem;
@@ -36,7 +36,7 @@
 
 .input:focus {
   outline: none;
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: #0a0a0a;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 4px var(--color-primary-dim), inset 0 2px 4px rgba(0,0,0,0.1);
   transform: translateY(-1px);
