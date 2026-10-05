@@ -255,6 +255,40 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+/* Resume Builder Layout */
+.resume-layout {
+  height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  margin-bottom: 4rem;
+}
+
+.editor-pane {
+  width: 43%;
+  height: 100%;
+  padding: var(--space-xl);
+  overflow-y: auto;
+  background-color: var(--color-canvas-base);
+}
+
+.preview-pane {
+  width: 57%;
+  min-height: auto;
+  background-color: var(--color-subtle-surface);
+  border-left: 1px solid var(--color-structural-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-btn {
+  white-space: nowrap;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 0.85rem;
+  flex: 1;
+}
+
 /* Responsive Overrides */
 @media (max-width: 992px) {
   .resume-layout {
@@ -266,10 +300,13 @@ select:-webkit-autofill:focus {
     width: 100% !important;
     height: auto !important;
     padding: var(--space-md) !important;
+    overflow-y: visible !important;
   }
   .preview-pane {
     width: 100% !important;
     min-height: 700px !important;
+    border-left: none !important;
+    border-top: 1px solid var(--color-structural-border) !important;
   }
 }
 
@@ -277,7 +314,8 @@ select:-webkit-autofill:focus {
   .btn-group-responsive {
     flex-wrap: wrap !important;
   }
-  .btn-group-responsive > button {
+  .btn-group-responsive > button,
+  .btn-group-responsive > .nav-btn {
     flex: 1 1 calc(50% - 8px) !important;
   }
 }

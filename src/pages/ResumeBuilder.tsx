@@ -149,27 +149,7 @@ export function ResumeBuilder() {
     }
   };
   
-  const checkIsMobile = () => {
-    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    return isMobileUA || window.innerWidth <= 992;
-  };
-
-  const checkIsSmallMobile = () => {
-    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    return isMobileUA || window.innerWidth <= 768;
-  };
-  
-  const [isMobile, setIsMobile] = useState(checkIsMobile());
-  const [isSmallMobile, setIsSmallMobile] = useState(checkIsSmallMobile());
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(checkIsMobile());
-      setIsSmallMobile(checkIsSmallMobile());
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Removed JS-based isMobile checks to rely on pure CSS for responsiveness
 
   const handleReset = () => {
     setShowResetModal(true);
@@ -225,22 +205,10 @@ export function ResumeBuilder() {
   });
 
   return (
-    <div className="resume-layout" style={{ 
-      height: isMobile ? 'auto' : 'calc(100vh - 72px)', 
-      display: 'flex', 
-      flexDirection: isMobile ? 'column' : 'row',
-      overflow: isMobile ? 'visible' : 'hidden', 
-      marginBottom: '4rem' 
-    }}>
+    <div className="resume-layout">
       
       {/* Editor Pane */}
-      <div className="editor-pane" style={{ 
-        width: isMobile ? '100%' : '43%', 
-        height: isMobile ? 'auto' : '100%',
-        padding: isMobile ? 'var(--space-md)' : 'var(--space-xl)', 
-        overflowY: isMobile ? 'visible' : 'auto', 
-        backgroundColor: 'var(--color-canvas-base)' 
-      }}>
+      <div className="editor-pane">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
           <h1 style={{ margin: 0 }}>Build Resume</h1>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -256,36 +224,36 @@ export function ResumeBuilder() {
         {/* Navigation for sections */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
           {/* Row 1 */}
-          <div style={{ display: 'flex', gap: '8px', flexWrap: isSmallMobile ? 'wrap' : 'nowrap', width: '100%' }}>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'personal' ? 'primary' : 'ghost'} onClick={() => setActiveTab('personal')}>
+          <div className="btn-group-responsive" style={{ display: 'flex', gap: '8px', width: '100%' }}>
+            <Button className="nav-btn" variant={activeTab === 'personal' ? 'primary' : 'ghost'} onClick={() => setActiveTab('personal')}>
               Personal Info
             </Button>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'education' ? 'primary' : 'ghost'} onClick={() => setActiveTab('education')}>
+            <Button className="nav-btn" variant={activeTab === 'education' ? 'primary' : 'ghost'} onClick={() => setActiveTab('education')}>
               Education
             </Button>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'experience' ? 'primary' : 'ghost'} onClick={() => setActiveTab('experience')}>
+            <Button className="nav-btn" variant={activeTab === 'experience' ? 'primary' : 'ghost'} onClick={() => setActiveTab('experience')}>
               Experience
             </Button>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'projects' ? 'primary' : 'ghost'} onClick={() => setActiveTab('projects')}>
+            <Button className="nav-btn" variant={activeTab === 'projects' ? 'primary' : 'ghost'} onClick={() => setActiveTab('projects')}>
               Projects
             </Button>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'skills' ? 'primary' : 'ghost'} onClick={() => setActiveTab('skills')}>
+            <Button className="nav-btn" variant={activeTab === 'skills' ? 'primary' : 'ghost'} onClick={() => setActiveTab('skills')}>
               Skills
             </Button>
           </div>
           
           {/* Row 2 */}
-          <div style={{ display: 'flex', gap: '8px', flexWrap: isSmallMobile ? 'wrap' : 'nowrap', width: '100%' }}>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'certifications' ? 'primary' : 'ghost'} onClick={() => setActiveTab('certifications')}>
+          <div className="btn-group-responsive" style={{ display: 'flex', gap: '8px', width: '100%' }}>
+            <Button className="nav-btn" variant={activeTab === 'certifications' ? 'primary' : 'ghost'} onClick={() => setActiveTab('certifications')}>
               Certifications
             </Button>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'achievements' ? 'primary' : 'ghost'} onClick={() => setActiveTab('achievements')}>
+            <Button className="nav-btn" variant={activeTab === 'achievements' ? 'primary' : 'ghost'} onClick={() => setActiveTab('achievements')}>
               Achievements
             </Button>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'languages' ? 'primary' : 'ghost'} onClick={() => setActiveTab('languages')}>
+            <Button className="nav-btn" variant={activeTab === 'languages' ? 'primary' : 'ghost'} onClick={() => setActiveTab('languages')}>
               Languages
             </Button>
-            <Button style={{ flex: isSmallMobile ? '1 1 calc(50% - 8px)' : 1, whiteSpace: 'nowrap', paddingLeft: '8px', paddingRight: '8px', fontSize: '0.85rem' }} variant={activeTab === 'interests' ? 'primary' : 'ghost'} onClick={() => setActiveTab('interests')}>
+            <Button className="nav-btn" variant={activeTab === 'interests' ? 'primary' : 'ghost'} onClick={() => setActiveTab('interests')}>
               Interests
             </Button>
           </div>
@@ -350,15 +318,7 @@ export function ResumeBuilder() {
       </div>
 
       {/* Preview Pane */}
-      <div className="preview-pane" style={{ 
-        width: isMobile ? '100%' : '57%', 
-        minHeight: isMobile ? '700px' : 'auto',
-        backgroundColor: 'var(--color-subtle-surface)', 
-        borderLeft: isMobile ? 'none' : '1px solid var(--color-structural-border)',
-        borderTop: isMobile ? '1px solid var(--color-structural-border)' : 'none',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
+      <div className="preview-pane">
         <div style={{ 
           display: 'flex', 
           justifyContent: 'space-between', 
