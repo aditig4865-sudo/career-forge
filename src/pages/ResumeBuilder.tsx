@@ -224,7 +224,7 @@ export function ResumeBuilder() {
         {/* Navigation for sections */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
           {/* Row 1 */}
-          <div className="btn-group-responsive" style={{ display: 'flex', gap: '8px', width: '100%' }}>
+          <div className="btn-group-responsive" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', width: '100%' }}>
             <Button className="nav-btn" variant={activeTab === 'personal' ? 'primary' : 'ghost'} onClick={() => setActiveTab('personal')}>
               Personal Info
             </Button>
@@ -243,7 +243,7 @@ export function ResumeBuilder() {
           </div>
           
           {/* Row 2 */}
-          <div className="btn-group-responsive" style={{ display: 'flex', gap: '8px', width: '100%' }}>
+          <div className="btn-group-responsive" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', width: '100%', marginTop: '8px' }}>
             <Button className="nav-btn" variant={activeTab === 'certifications' ? 'primary' : 'ghost'} onClick={() => setActiveTab('certifications')}>
               Certifications
             </Button>
