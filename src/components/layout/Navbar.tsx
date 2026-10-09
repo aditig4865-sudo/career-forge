@@ -4,7 +4,7 @@ import { Button } from '../ui/Button';
 import styles from './Navbar.module.css';
 import { signOut, onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '../../config/firebase';
-import { User as UserIcon, ChevronDown, Shield } from 'lucide-react';
+import { User as UserIcon, ChevronDown, Shield, Menu, X } from 'lucide-react';
 import { trackUserSignIn } from '../../services/adminService';
 import { isUserAdmin } from '../../config/admin';
 import { AuthModal } from '../auth/AuthModal';
@@ -14,6 +14,7 @@ export function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -42,6 +43,10 @@ export function Navbar() {
 
   const isActive = (path: string) => {
     return location.pathname === path ? styles.active : '';
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -114,7 +119,7 @@ export function Navbar() {
                       <Link 
                         to="/my-resumes" 
                         style={{ display: 'block', padding: '0.75rem 0.75rem', fontSize: '1rem', fontWeight: 500, color: 'var(--color-text)', textDecoration: 'none', borderRadius: 'var(--radius-sm)' }}
-                        onClick={() => setIsDropdownOpen(false)}
+                        onClick={() => { setIsDropdownOpen(false); closeMobileMenu(); }}
                         onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-surface-hover)'; e.currentTarget.style.color = 'var(--color-text-main)'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--color-text)'; }}
                       >
@@ -124,7 +129,7 @@ export function Navbar() {
                         <Link 
                           to="/admin" 
                           style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 0.75rem', fontSize: '1rem', fontWeight: 500, color: 'var(--color-primary)', textDecoration: 'none', borderRadius: 'var(--radius-sm)' }}
-                          onClick={() => setIsDropdownOpen(false)}
+                          onClick={() => { setIsDropdownOpen(false); closeMobileMenu(); }}
                           onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-surface-hover)'; }}
                           onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                         >
@@ -133,7 +138,7 @@ export function Navbar() {
                         </Link>
                       )}
                       <div 
-                        onClick={handleLogout}
+                        onClick={() => { handleLogout(); closeMobileMenu(); }}
                         style={{ display: 'block', padding: '0.75rem 0.75rem', fontSize: '1rem', fontWeight: 500, color: 'var(--color-text)', cursor: 'pointer', borderRadius: 'var(--radius-sm)', marginTop: '0.25rem' }}
                         onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-surface-hover)'; e.currentTarget.style.color = 'var(--color-error)'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--color-text)'; }}
@@ -145,12 +150,33 @@ export function Navbar() {
                 )}
               </div>
             ) : (
-              <Button variant="primary" onClick={handleLogin} style={{ padding: '0.5rem 1.25rem', fontSize: '0.9375rem' }}>
+              <Button variant="primary" onClick={() => { handleLogin(); closeMobileMenu(); }} style={{ padding: '0.5rem 1.25rem', fontSize: '0.9375rem' }}>
                 Sign In
               </Button>
             )}
+            
+            {!isAdminPage && (
+              <button 
+                className={styles.mobileMenuBtn} 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            )}
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {!isAdminPage && isMobileMenuOpen && (
+          <div className={styles.mobileNav}>
+            <Link to="/" className={`${styles.mobileNavLink} ${isActive('/')}`} onClick={closeMobileMenu}>Home</Link>
+            <Link to="/resume-builder" className={`${styles.mobileNavLink} ${isActive('/resume-builder')}`} onClick={closeMobileMenu}>Resume Builder</Link>
+            <Link to="/templates" className={`${styles.mobileNavLink} ${isActive('/templates')}`} onClick={closeMobileMenu}>Templates</Link>
+            <Link to="/career-guidance" className={`${styles.mobileNavLink} ${isActive('/career-guidance')}`} onClick={closeMobileMenu}>Career Guidance</Link>
+            <Link to="/#feedback" className={styles.mobileNavLink} onClick={closeMobileMenu}>Feedback</Link>
+          </div>
+        )}
       </nav>
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </div>

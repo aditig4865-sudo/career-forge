@@ -169,6 +169,7 @@ export function PersonalInfoForm() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+      <h2 style={{ marginBottom: '1rem', fontSize: '1.5rem', fontWeight: 600 }}>Personal Information</h2>
       <Input label="Full Name" name="fullName" value={personalInfo.fullName} onChange={handleChange} placeholder="Your Full Name" />
       <div className="form-grid form-grid-2">
         <Input 
