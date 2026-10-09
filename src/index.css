@@ -285,8 +285,8 @@ select:-webkit-autofill:focus {
   white-space: nowrap;
   padding-left: 12px;
   padding-right: 12px;
-  font-size: 1.25rem !important;
-  font-weight: bold !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
   flex: 1 0 auto;
 }
 
