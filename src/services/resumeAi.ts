@@ -9,7 +9,10 @@ export async function generateResume(prompt: string): Promise<Partial<ResumeData
   }
 
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ 
+    model: "gemini-1.5-flash",
+    generationConfig: { responseMimeType: "application/json" }
+  });
 
   const systemPrompt = `You are an expert resume writer. Given a brief description of a person's background, generate a professional resume structure. 
 Return ONLY valid JSON that matches the following TypeScript interface (excluding the typescript definition, just the JSON object).
@@ -75,12 +78,13 @@ User Prompt: ${prompt}`;
     const response = await result.response;
     let text = response.text();
     
+    // In case the model still returns markdown
     text = text.replace(/```json\n?/, '').replace(/```\n?/, '');
     
     return JSON.parse(text);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error generating resume:", error);
-    throw new Error("Failed to generate resume from AI.");
+    throw new Error(error.message || "Failed to generate resume from AI.");
   }
 }
 
@@ -90,7 +94,10 @@ export async function checkATSMatch(resumeData: ResumeData, jobDescription: stri
   }
 
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ 
+    model: "gemini-1.5-flash",
+    generationConfig: { responseMimeType: "application/json" }
+  });
 
   const systemPrompt = `You are an expert ATS (Applicant Tracking System) software. Analyze the provided resume against the job description.
 Return ONLY valid JSON with no markdown formatting.
@@ -112,6 +119,7 @@ ${jobDescription}`;
     const result = await model.generateContent(systemPrompt);
     const response = await result.response;
     let text = response.text();
+    // In case the model still returns markdown
     text = text.replace(/```json\n?/, '').replace(/```\n?/, '');
     return JSON.parse(text) as {
       score: number;
@@ -119,8 +127,8 @@ ${jobDescription}`;
       missingKeywords: string[];
       suggestions: string[];
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error checking ATS match:", error);
-    throw new Error("Failed to check ATS match from AI.");
+    throw new Error(error.message || "Failed to check ATS match from AI.");
   }
 }
